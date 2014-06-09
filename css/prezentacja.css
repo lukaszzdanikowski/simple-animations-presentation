@@ -1,0 +1,49 @@
+canvas#curve1, canvas#curve2 {
+	background: #ffffff;
+
+}
+
+
+.reveal .animPlayground {
+    position: relative;
+    width: 400px;
+    margin: 50px auto 0;
+    height: 50px;
+    background-color: #ffffff;
+}
+
+.animButton1 {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: blue;
+    position: absolute;
+    left: 0;
+    -webkit-transition: all 4s linear;
+     -moz-transition: all 4s linear;
+       -o-transition: all 4s linear;
+          transition: all 4s linear; /* linear */
+}
+
+.animButton1.animeMe {
+    left: 350px;
+}
+
+.animButton2 {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: blue;
+    position: absolute;
+    left: 0;
+    -webkit-transition: all 4s cubic-bezier(.6,-1.42,.25,1.94);
+     -moz-transition: all 4s cubic-bezier(.6,-1.42,.25,1.94);
+       -o-transition: all 4s cubic-bezier(.6,-1.42,.25,1.94);
+          transition: all 4s cubic-bezier(.6,-1.42,.25,1.94); /* linear */
+}
+
+.animButton2.animeMe {
+    left: 350px;
+}
