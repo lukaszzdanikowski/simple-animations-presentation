@@ -3,6 +3,26 @@ canvas#curve1, canvas#curve2 {
 
 }
 
+#vis {
+    background-color: #ffffff;
+}
+
+.curve, .line {
+    fill: none;
+    stroke-width: 1px;
+}
+.curve {
+    stroke: red;
+    stroke-width: 3px;
+}
+.control {
+    fill: #ccc;
+    stroke: #000;
+    stroke-width: .5px;
+}
+.t, .controltext {
+    font-size: .6em;
+}
 
 .reveal .animPlayground {
     position: relative;
@@ -10,6 +30,12 @@ canvas#curve1, canvas#curve2 {
     margin: 50px auto 0;
     height: 50px;
     background-color: #ffffff;
+}
+
+.reveal .animPlaygroundWrapper {
+    background-color: #ffffff;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .animButton1 {
