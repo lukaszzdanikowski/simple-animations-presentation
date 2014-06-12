@@ -7,7 +7,7 @@ var w = 250,
     bezier = {},
     line = d3.svg.line().x(x).y(y),
     n = 4,
-    stroke = d3.scale.category20b(),
+    stroke = d3.scale.category20c(),
     orders = d3.range(2, n + 2);
 
 var vis = d3.select("#vis").selectAll("svg")
