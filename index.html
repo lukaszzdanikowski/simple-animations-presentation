@@ -6,7 +6,7 @@
 
 		<title>Funkcje w animacjach</title>
 
-		<meta name="description" content="Prezentacja prostych funkcji umożliwiających animacje">
+		<meta name="description" content="Prezentacja prostych funkcji wykorzystywanych w animacjach">
 		<meta name="author" content="Łukasz Zdanikowski">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,8 +55,9 @@
 				<section data-state="linear">
 					<h2>Animacja liniowa</h2>
 					<canvas height="400" width="400" id="curve1"></canvas>
+                    
                     <div class="animPlayground">
-						<span class="animButton1" id="animButton1"></span>
+						<canvas height="50" width="400" id="curve1b"></canvas>
 					</div>
 				</section>
 
@@ -64,7 +65,7 @@
 					<h2>Animacja krzywą Beziera</h2>
                     <canvas height="400" width="400" id="curve2"></canvas>
 					<div class="animPlayground">
-						<span class="animButton2" id="animButton2"></span>
+						<canvas height="50" width="400" id="curve2b"></canvas>
 					</div>
 				</section>
 
@@ -133,13 +134,16 @@
 
             Reveal.addEventListener('linear', function(ev) {
                 var canvas = document.getElementById("curve1");
+                var canvasb = document.getElementById("curve1b");
                 var context = canvas.getContext("2d");
+                var contextb = canvasb.getContext("2d");
                 var time = 0;
                 var duration = 4;
                 var delta = 1/(duration*60)
                 var radius = 10;
 
                 context.setTransform(1, 0, 0, -1, 0, 400);
+                contextb.setTransform(1, 0, 0, -1, 0, 50);
 
                 function draw() {
                     var start = {
@@ -155,6 +159,8 @@
 
 
                     context.clearRect(0, 0, canvas.width, canvas.height);
+                    contextb.clearRect(0, 0, canvasb.width, canvasb.height);
+                    
                     context.beginPath();
                     context.moveTo(start.x, start.y);
                     context.strokeStyle = "#e00";
@@ -172,6 +178,14 @@
 
                     context.closePath();
 
+                    contextb.beginPath();
+                    contextb.lineWidth = 1;
+                    contextb.strokeStyle = "#008";
+                    contextb.fillStyle = '#00e';
+                    contextb.arc(start.y + time * (end.y - start.y), start.y/2, 10, 0, 2 * Math.PI, false);
+                    contextb.fill();
+
+                    contextb.closePath();
 
                     if (time <= 1) {
                         requestAnimationFrame(draw);
@@ -185,21 +199,21 @@
 
                 setTimeout(function() {
                     draw();
-                    var animButton = document.getElementById("animButton1");
-                    animButton.classList.toggle('animeMe');
-                }, 2000);
+                }, 1000);
             });
 
             Reveal.addEventListener('bezier', function(ev) {
                 var canvas = document.getElementById("curve2");
                 var context = canvas.getContext("2d");
+                var canvasb = document.getElementById("curve2b");
+                var contextb = canvasb.getContext("2d");
                 var time = 0;
                 var duration = 4;
                 var delta = 1/(duration*60)
                 var radius = 10;
 
                 context.setTransform(1, 0, 0, -1, 0, 400);
-
+                contextb.setTransform(1, 0, 0, -1, 0, 50);
 
                 function B1(point0, point1, time) {
                     return {
@@ -244,14 +258,15 @@
 
 
                     var P1 = {
-                        x: start.x + .6 * dist.x,
-                        y: start.y + -1.42 * dist.y,
+                        x: start.x + .7 * dist.x,
+                        y: start.y + -0.42 * dist.y,
                     }, P2 = {
                         x: start.x + .25 * dist.x,
-                        y: start.y + 1.94 * dist.y
+                        y: start.y + 1.54 * dist.y
                     };
 
                     context.clearRect(0, 0, canvas.width, canvas.height);
+                    contextb.clearRect(0, 0, canvasb.width, canvasb.height);
                     context.beginPath();
                     context.moveTo(start.x, start.y);
                     context.strokeStyle = "#e00";
@@ -260,16 +275,26 @@
                     context.stroke();
                     context.closePath();
 
+                    point = B3(start, P1, P2, end, time);
+
                     context.beginPath();
                     context.lineWidth = 1;
                     context.strokeStyle = "#008";
                     context.fillStyle = '#00e';
-                    point = B3(start, P1, P2, end, time);
+                    
                     context.arc(point.x, point.y, 10, 0, 2 * Math.PI, false);
                     context.fill();
 
                     context.closePath();
 
+                    contextb.beginPath();
+                    contextb.lineWidth = 1;
+                    contextb.strokeStyle = "#008";
+                    contextb.fillStyle = '#00e';
+                    contextb.arc(point.y, start.x/2, 10, 0, 2 * Math.PI, false);
+                    contextb.fill();
+
+                    contextb.closePath();
 
                     if (time <= 1) {
                         requestAnimationFrame(draw);
@@ -283,9 +308,7 @@
 
                 setTimeout(function() {
                     draw();
-                    var animButton = document.getElementById("animButton2");
-                    animButton.classList.toggle('animeMe');
-                }, 2000);
+                }, 1000);
             });
 
 		</script>
